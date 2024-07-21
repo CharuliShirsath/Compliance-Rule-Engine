@@ -1,13 +1,16 @@
 package com.team4.compliance;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.List;
 
-@SpringBootApplication
 public class ComplianceRuleEngineApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ComplianceRuleEngineApplication.class, args);
-	}
+    public static void main(String[] args) {
+        ComplianceRule rule = new ComplianceRule("rule1", "Device ID must be device1", config -> config.getDeviceId().equals("device1"));
+        ComplianceService service = new ComplianceService(List.of(rule));
 
+        Configuration config = new Configuration("device1", "{...}");
+        List<String> result = service.analyzeCompliance(config);
+
+        System.out.println("Non-compliant rules: " + result);
+    }
 }
