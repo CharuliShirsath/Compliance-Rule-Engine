@@ -20,8 +20,10 @@ public class ReportService {
         return JasperExportManager.exportReportToPdf(print);
     }
 
-    private static net.sf.jasperreports.engine.JasperReport getCompiledReport() throws JRException {
-        String path = "compliance_report.jrxml";
-        return JasperCompileManager.compileReport(path);
+    private net.sf.jasperreports.engine.JasperReport getCompiledReport() throws JRException {
+        // Use class loader to load the resource
+        return JasperCompileManager.compileReport(
+            getClass().getClassLoader().getResourceAsStream("compliance_report.jrxml")
+        );
     }
 }
