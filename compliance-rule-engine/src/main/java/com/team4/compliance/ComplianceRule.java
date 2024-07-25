@@ -3,8 +3,10 @@ package com.team4.compliance;
 import java.util.function.Predicate;
 
 public class ComplianceRule {
+	
     private String ruleId;
     private String description;
+    
     private Predicate<Configuration> rule;
 
     public ComplianceRule(String ruleId, String description, Predicate<Configuration> rule) {
